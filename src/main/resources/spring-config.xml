@@ -1,0 +1,23 @@
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean id="user" class="Pojo.User" scope="singleton">
+    </bean>
+
+    <bean id="rol" class="Pojo.Rol" scope="singleton">
+    </bean>
+
+    <bean id="dataBase" class="DataBase.DataBase" scope="singleton">
+    </bean>
+
+    <bean id="userDao" class="Dao.UserDaoImplement" scope="singleton">
+        <property name="ddbb" ref="dataBase"/>
+    </bean>
+
+
+
+</beans>
+
