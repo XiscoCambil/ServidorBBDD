@@ -1,6 +1,3 @@
-<!DOCTYPE web-app PUBLIC
- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app xmlns="http://java.sun.com/xml/ns/javaee"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -21,6 +18,17 @@
     <servlet-name>UserControler</servlet-name>
     <url-pattern>/index</url-pattern>
   </servlet-mapping>
+
+  <servlet>
+    <servlet-name>RolControler</servlet-name>
+    <servlet-class>Controler.RolControler</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>RolControler</servlet-name>
+    <url-pattern>/Rol</url-pattern>
+  </servlet-mapping>
+
 
 
 </web-app>

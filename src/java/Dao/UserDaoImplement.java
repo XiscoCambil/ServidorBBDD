@@ -1,7 +1,6 @@
 package Dao;
 
 import Clases.Injector;
-import Clases.Injector;
 import DataBase.DataBase;
 import Pojo.Rol;
 import Pojo.User;
@@ -37,10 +36,6 @@ public class UserDaoImplement implements UserDaoInterface {
         return usuarios;
     }
 
-    public List<User> getUsers() {
-        return null;
-    }
-
     public User findUser(String userName) throws SQLException {
         String users = "SELECT user_name,user_pass FROM user where user_name= ?";
         PreparedStatement ps = ddbb.getCon().prepareStatement(users);
@@ -55,30 +50,94 @@ public class UserDaoImplement implements UserDaoInterface {
         return null;
     }
 
-    public User findUser(String username, boolean rool) throws SQLException {
+    public List<User> findUser(String username, boolean rool) throws SQLException {
         String sql = "SELECT u.user_name,u.user_pass ";
-        sql += rool?",ur.role_name ":"";
+        sql += rool?",r.rol_name,r.rol_desc ":"";
         sql += "FROM user as u ";
-        sql += rool?"INNER JOIN user_roles as ur ON u.user_name = ur.user_name ":"";
+        sql += rool?"INNER JOIN user_roles as ur ON u.user_name = ur.user_name INNER JOIN rol as r ON ur.role_name = r.rol_name ":"";
         sql += "WHERE u.user_name = ?";
-        System.out.println(sql);
         PreparedStatement ps = ddbb.getCon().prepareStatement(sql);
         ps.setString(1,username);
         ResultSet rs = ps.executeQuery();
+        List<User> usuarios = new ArrayList<User>();
+        List<Rol> roles = new ArrayList<Rol>();
+        User user = null;
         while (rs.next()){
-            User user = (User)Injector.getCache().getBean("user");
-            user.setName(rs.getString("user_name"));
-            user.setPassword(rs.getString("user_pass"));
+            if(user == null){
+                user = (User)Injector.getCache().getBean("user");
+                user.setName(rs.getString("user_name"));
+                user.setPassword(rs.getString("user_pass"));
+            }
             if(rool) {
                 Rol rol = (Rol) Injector.getCache().getBean("rol");
-                rol.setRol_name(rs.getString("role_name"));
-                List<Rol> roles = new ArrayList<Rol>();
+                rol.setRol_name(rs.getString("rol_name"));
+                rol.setRol_desc(rs.getString("rol_desc"));
                 roles.add(rol);
-                user.setRoles(roles);
             }
-            return user;
         }
-        return null;
+        user.setRoles(roles);
+        usuarios.add(user);
+        return usuarios;
+    }
+
+    public void insertUser(String userName, String password, String[] roles) throws SQLException {
+        String sql = "INSERT INTO user VALUES(?,?)";
+        PreparedStatement ps = ddbb.getCon().prepareStatement(sql);
+        ps.setString(1,userName);
+        ps.setString(2,password);
+        ps.execute();
+        sql = "INSERT INTO user_roles VALUES(?,?)";
+        for (int i = 0; i < roles.length; i++) {
+            ps = ddbb.getCon().prepareStatement(sql);
+            ps.setString(1,userName);
+            ps.setString(2,roles[i]);
+            ps.execute();
+        }
+    }
+
+    public List<User> getUsers() throws SQLException {
+        String sql = "SELECT u.user_name,u.user_pass,r.rol_name,r.rol_desc FROM user as u INNER JOIN user_roles as ur ON u.user_name = ur.user_name INNER JOIN rol as r ON ur.role_name = r.rol_name";
+        PreparedStatement ps = ddbb.getCon().prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        List<User> usuarios = new ArrayList<User>();
+        List<Rol> roles = new ArrayList<Rol>();
+        String usuario = "";
+        User user = null;
+        Rol rol = null;
+        while (rs.next()) {
+            if (usuario.equals("")) {
+                user = (User) Injector.getCache().getBean("user");
+                user.setName(rs.getString("user_name"));
+                user.setPassword(rs.getString("user_pass"));
+            } else if (!usuario.equals(rs.getString("user_name"))) {
+                user.setRoles(roles);
+                usuarios.add(user);
+                user = (User) Injector.getCache().getBean("user");
+                user.setName(rs.getString("user_name"));
+                user.setPassword(rs.getString("user_pass"));
+                roles = new ArrayList<Rol>();
+            }
+                rol = (Rol) Injector.getCache().getBean("rol");
+                usuario = rs.getString("user_name");
+                rol.setRol_name(rs.getString("rol_name"));
+                rol.setRol_desc(rs.getString("rol_desc"));
+                roles.add(rol);
+        }
+        user.setRoles(roles);
+        usuarios.add(user);
+        return usuarios;
+    }
+
+    public void deleteUser(String userName) throws SQLException {
+        String sql = "DELETE FROM user_roles where user_name = ?";
+        PreparedStatement ps = ddbb.getCon().prepareStatement(sql);
+        ps = ddbb.getCon().prepareStatement(sql);
+        ps.setString(1,userName);
+        ps.execute();
+        sql = "DELETE FROM user WHERE user_name = ?";
+        ps.setString(1,userName);
+        ps.execute();
+
     }
 
     public void setDdbb(DataBase ddbb) {

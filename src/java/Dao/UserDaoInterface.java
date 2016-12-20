@@ -1,12 +1,15 @@
 package Dao;
 
+import Pojo.Rol;
 import Pojo.User;
 
 import java.sql.SQLException;
 import java.util.List;
 
 public interface UserDaoInterface {
-    List<User> getUsers();
     User findUser(String userName) throws SQLException;
-    User findUser(String username,boolean rool) throws SQLException;
+    List<User> findUser(String username,boolean rool) throws SQLException;
+    void insertUser(String userName,String password,String[] roles) throws SQLException;
+    List<User> getUsers() throws SQLException;
+    void deleteUser(String userName) throws SQLException;
 }
