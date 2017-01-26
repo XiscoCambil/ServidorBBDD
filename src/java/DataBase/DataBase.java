@@ -9,7 +9,7 @@ import java.sql.SQLException;
  */
 public class DataBase {
     private String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-    private String DB_URL = "jdbc:mysql://172.16.4.213/dwes";
+    private String DB_URL = "jdbc:mysql://172.16.2.29/dwes";
     private String USER = "root";
     private String PSWD = "test";
     private Connection con = null;

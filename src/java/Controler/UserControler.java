@@ -1,7 +1,5 @@
 package Controler;
 
-//import Clases.Injector;
-
 import Clases.Injector;
 import Dao.RolDaoImplement;
 import Dao.UserDaoImplement;
@@ -15,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
@@ -47,15 +44,16 @@ public class UserControler extends HttpServlet {
                     throw new ServletException();
                 }
             }
-        }
-        try {
-            usuarios = UseDao.getUsers();
-            List<Rol> roles = RolDao.getRoles();
-            request.setAttribute("user", usuarios);
-            request.setAttribute("check_rol", roles);
-            rd.forward(request, response);
-        } catch (SQLException e) {
-            e.printStackTrace();
+        }else {
+            try {
+                usuarios = UseDao.getUsers();
+                List<Rol> roles = RolDao.getRoles();
+                request.setAttribute("user", usuarios);
+                request.setAttribute("check_rol", roles);
+                rd.forward(request, response);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
