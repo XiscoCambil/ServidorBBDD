@@ -11,7 +11,7 @@
 
   <servlet>
     <servlet-name>UserControler</servlet-name>
-    <servlet-class>Controler.UserControler</servlet-class>
+    <servlet-class>controler.UserControler</servlet-class>
   </servlet>
 
   <servlet-mapping>
@@ -21,7 +21,7 @@
 
   <servlet>
     <servlet-name>RolControler</servlet-name>
-    <servlet-class>Controler.RolControler</servlet-class>
+    <servlet-class>controler.RolControler</servlet-class>
   </servlet>
 
   <servlet-mapping>
@@ -29,6 +29,40 @@
     <url-pattern>/Rol</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>CloseSession</servlet-name>
+    <servlet-class>controler.CloseSession</servlet-class>
+  </servlet>
 
+
+  <servlet-mapping>
+    <servlet-name>CloseSession</servlet-name>
+    <url-pattern>/logout</url-pattern>
+  </servlet-mapping>
+
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>Wildcard means whole app requires authentication</web-resource-name>
+      <url-pattern>/index</url-pattern>
+      <http-method>GET</http-method>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>administrador</role-name>
+    </auth-constraint>
+    <auth-constraint>
+      <role-name>user</role-name>
+    </auth-constraint>
+    <user-data-constraint>
+      <transport-guarantee>NONE</transport-guarantee>
+    </user-data-constraint>
+  </security-constraint>
+
+  <login-config>
+    <auth-method>FORM</auth-method>
+    <form-login-config>
+      <form-login-page>/login.jsp</form-login-page>
+      <form-error-page>/error.jsp</form-error-page>
+    </form-login-config>
+  </login-config>
 
 </web-app>

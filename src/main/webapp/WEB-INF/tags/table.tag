@@ -17,7 +17,11 @@
                             <c:out value="${rol.rol_name} "/>
                         </c:forEach>
                     </td>
-                    <td><a href="/index?delete=${user.name}">delete</a></td>
+                    <c:choose>
+                        <c:when test="${requestScope['admin'] == true}">
+                            <td><a href="/index?delete=${user.name}">delete</a></td>
+                        </c:when>
+                    </c:choose>
                 </tr>
             </c:forEach>
         </table>

@@ -3,20 +3,20 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-<bean id="user" class="Pojo.User" scope="prototype">
+<bean id="user" class="pojo.User" scope="prototype">
     </bean>
 
-    <bean id="rol" class="Pojo.Rol" scope="prototype">
+    <bean id="rol" class="pojo.Rol" scope="prototype">
     </bean>
 
-    <bean id="dataBase" class="DataBase.DataBase" scope="singleton">
+    <bean id="dataBase" class="database.DataBase" scope="singleton">
     </bean>
 
-    <bean id="userDao" class="Dao.UserDaoImplement" scope="singleton">
+    <bean id="userDao" class="dao.UserDaoImplement" scope="singleton">
         <property name="ddbb" ref="dataBase"/>
     </bean>
 
-    <bean id="rolDao" class="Dao.RolDaoImplement" scope="singleton">
+    <bean id="rolDao" class="dao.RolDaoImplement" scope="singleton">
         <property name="ddbb" ref="dataBase"/>
     </bean>
 

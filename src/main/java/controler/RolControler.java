@@ -1,19 +1,14 @@
-package Controler;
+package controler;
 
-import Clases.Injector;
-import Dao.RolDaoImplement;
-import Dao.UserDaoImplement;
-import Pojo.Rol;
-import Pojo.User;
+import clases.Injector;
+import dao.RolDaoImplement;
+import pojo.Rol;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Enumeration;

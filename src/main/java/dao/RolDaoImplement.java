@@ -1,9 +1,8 @@
-package Dao;
+package dao;
 
-import Clases.Injector;
-import DataBase.DataBase;
-import Pojo.Rol;
-import Pojo.User;
+import clases.Injector;
+import database.DataBase;
+import pojo.Rol;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

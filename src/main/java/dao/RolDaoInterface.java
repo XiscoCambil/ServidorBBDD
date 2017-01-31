@@ -1,6 +1,6 @@
-package Dao;
+package dao;
 
-import Pojo.Rol;
+import pojo.Rol;
 
 import java.sql.SQLException;
 import java.util.List;

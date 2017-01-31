@@ -1,4 +1,4 @@
-package Pojo;
+package pojo;
 
 /**
  * Created by blackwidow on 7/12/16.
