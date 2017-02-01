@@ -11,6 +11,6 @@
     <title>Title</title>
 </head>
 <body>
-<p>Error</p>
+<p>Error, no existe el usuario o la contraseña</p>
 </body>
 </html>

@@ -15,6 +15,6 @@ public class CloseSession extends HttpServlet {
                               HttpServletResponse response)
             throws ServletException, IOException {
             request.getSession().invalidate();
-            response.sendRedirect("/index");
+            response.sendRedirect("/index.jsp");
     }
 }

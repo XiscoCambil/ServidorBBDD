@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<form action="/index" method="post">
+<form action="/users" method="post">
     <label>Nombre Usuario</label>
     <input name="nombre" type="text">
     <label>Password</label>

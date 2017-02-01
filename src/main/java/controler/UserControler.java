@@ -28,7 +28,7 @@ public class UserControler extends HttpServlet {
         UserDaoImplement UseDao = (UserDaoImplement) Injector.getCache().getBean("userDao");
         RolDaoImplement RolDao = (RolDaoImplement) Injector.getCache().getBean("rolDao");
         List<User> usuarios = null;
-        RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/users.jsp");
 
         if(request.isUserInRole("administrador")){
             Enumeration paramNames = request.getParameterNames();
@@ -75,7 +75,7 @@ public class UserControler extends HttpServlet {
         try {
             UserDaoImplement userDao = (UserDaoImplement) Injector.getCache().getBean("userDao");
             userDao.insertUser(user_name, user_pass, roles);
-            response.sendRedirect("/index");
+            response.sendRedirect("/users");
         } catch (Exception e) {
             e.printStackTrace();
         }

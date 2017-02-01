@@ -19,7 +19,7 @@
                     </td>
                     <c:choose>
                         <c:when test="${requestScope['admin'] == true}">
-                            <td><a href="/index?delete=${user.name}">delete</a></td>
+                            <td><a href="/users?delete=${user.name}">delete</a></td>
                         </c:when>
                     </c:choose>
                 </tr>
